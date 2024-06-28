@@ -250,4 +250,4 @@ add_theme_support('post-thumbnails');
 add_image_size('archive-banner', 582, 332, true); 
 
 //Change hero image size for optimization
-add_image_size('hero-image',1184, 705, true); 
+add_image_size('hero-image',1980, 367, true); 
