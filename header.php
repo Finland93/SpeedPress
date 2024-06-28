@@ -7,6 +7,9 @@
     <?php wp_head(); ?>
 	<meta name="msapplication-TileColor" content="#000">
 	<meta name="theme-color" content="#000">
+	<link rel="preload" href="<?php echo get_template_directory_uri(); ?>/fonts/Lato-Regular.woff2" as="font" type="font/woff2" crossorigin>
+    	<link rel="preload" href="<?php echo get_template_directory_uri(); ?>/fonts/Montserrat-Regular.woff2" as="font" type="font/woff2" crossorigin>
+    	<link rel="preload" href="<?php echo get_template_directory_uri(); ?>/fonts/RobotoCondensed-Regular.woff2" as="font" type="font/woff2" crossorigin>
 	<style>@media print {html, body {display: none; }}p, h1, h2, h3, h4, h5, h6, img, iframe, br, li, ul, a, div {-webkit-touch-callout: none;-webkit-user-select: none;-khtml-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none;}img, picture, a {-webkit-user-drag: none;-khtml-user-drag: none;-moz-user-drag: none;-o-user-drag: none;user-drag: none;}</style>
 </head>
 <body>
