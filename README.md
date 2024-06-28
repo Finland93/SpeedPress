@@ -41,3 +41,4 @@ Enhance your site's performance and user engagement with these plugins:
 ### Learn more about [Bootstrap 5](https://getbootstrap.com/docs/5.2/getting-started/introduction) and start building your SEO-optimized WordPress site today with SpeedPress!
 
 ---
+## Checkout also our Fan token on Solana with ticker SPT, you can buy it via [Moonshot]([https://getbootstrap.com/docs/5.2/getting-started/introduction](https://dexscreener.com/solana/45ewjjsxwnc5pwwkjf1sjkric414kizndbu48npgjbbu))
