@@ -37,7 +37,7 @@
                             <?php if (has_post_thumbnail()) : ?>
                                 <div class="position-relative">
                                     <a href="<?php the_permalink(); ?>">
-                                        <img src="<?php the_post_thumbnail_url('medium'); ?>" class="card-img-top" alt="<?php the_title_attribute(); ?>">
+                                        <img width="388" height="221" src="<?php the_post_thumbnail_url('medium'); ?>" class="card-img-top" alt="<?php the_title_attribute(); ?>">
                                     </a>
                                     <?php
                                     $categories = get_the_category();
