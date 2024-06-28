@@ -245,6 +245,3 @@ add_action('wp_before_admin_bar_render', 'speedpress_disable_comments_admin_bar_
 
 // Add theme support for Featured Images
 add_theme_support('post-thumbnails');
-
-//Change archive image size for optimization
-add_image_size('custom-size', 582, 332, true); 
