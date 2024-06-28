@@ -244,4 +244,4 @@ function speedpress_disable_comments_admin_bar_icon() {
 add_action('wp_before_admin_bar_render', 'speedpress_disable_comments_admin_bar_icon');
 
 // Add theme support for Featured Images
-add_theme_support('post-thumbnails', 'speedpress');
+add_theme_support('post-thumbnails');
