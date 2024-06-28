@@ -11,10 +11,11 @@ SpeedPress revolutionizes WordPress by combining the speed and engagement of pur
 ### Key Features:
 
 - **SEO Excellence**: Crafted with best SEO practices in mind, SpeedPress ensures your site ranks high. It includes Schema.org validated snippets, setting you apart from competitors.
-  
 - **Performance**: Achieve perfect PageSpeed scores and high SEO rankings effortlessly. Our theme is optimized for speed and equipped with PWA readiness, favicons, and app icons.
-
-- **Customizability**: Utilize our diverse templates, including options for affiliate marketing, and enhance engagement with recommended plugins.
+- **Customizability**: Utilize our diverse templates, including options for affiliate marketing, and enhance engagement with recommended plugins. PHP, HTML, and CSS customization capabilities allow you to tailor every aspect of the theme to your needs.
+- **Lightweight and Fast**: Built without jQuery and Gutenberg, SpeedPress eliminates unnecessary scripts for unparalleled speed and efficiency.
+- **Accessibility**: Designed with accessibility in mind, ensuring your website is usable by everyone.
+- **Security**: Robust security measures protect your website from vulnerabilities, giving you peace of mind.
 
 ## Building with SpeedPress
 
@@ -35,11 +36,8 @@ Enhance your site's performance and user engagement with these plugins:
 - **[Scriptless Social Sharing](https://fi.wordpress.org/plugins/scriptless-social-sharing/)**
 - **[Reading Time WP](https://fi.wordpress.org/plugins/reading-time-wp/)**
 
-These plugins are tailored for those who prioritize website SEO and user engagement. 
-
 ---
 
 ### Learn more about [Bootstrap 5](https://getbootstrap.com/docs/5.2/getting-started/introduction) and start building your SEO-optimized WordPress site today with SpeedPress!
 
 ---
-
