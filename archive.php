@@ -29,7 +29,6 @@
                     <div class="archive-description"><?php echo term_description(); ?></div>
                 <?php endif; ?>
             </header>
-
             <div class="row">
                 <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
                     <div class="col-md-6 mb-4">
@@ -37,7 +36,7 @@
                             <?php if (has_post_thumbnail()) : ?>
                                 <div class="position-relative">
                                     <a href="<?php the_permalink(); ?>">
-                                        <img width="388" height="221" src="<?php the_post_thumbnail_url('medium'); ?>" class="card-img-top" alt="<?php the_title_attribute(); ?>">
+                                        <?php echo wp_get_attachment_image(get_post_thumbnail_id(), 'custom-size', false, array('class' => 'card-img-top')); ?>
                                     </a>
                                     <?php
                                     $categories = get_the_category();
