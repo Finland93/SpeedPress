@@ -3,7 +3,7 @@
 <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
     <?php if (has_post_thumbnail()) : ?>
         <div class="hero-section mb-5">
-            <img src="<?php the_post_thumbnail_url('large'); ?>" class="img-fluid w-100" alt="<?php the_title_attribute(); ?>">
+            <img src="<?php the_post_thumbnail_url('hero-image'); ?>" class="img-fluid w-100" alt="<?php the_title_attribute(); ?>">
         </div>
     <?php endif; ?>
 <?php endwhile; endif; ?>
