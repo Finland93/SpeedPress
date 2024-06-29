@@ -192,6 +192,14 @@ footer a {
         color: #555;
     }
 
+/* Sticky sidebar for blog */
+.sidebar {
+  position: -webkit-sticky; 
+  position: sticky;
+  top: 0; 
+  z-index: 1000; 
+}
+
 /* Mobile Styling */
 @media (max-width: 991.98px) {
     .navbar .navbar-collapse {
