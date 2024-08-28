@@ -71,10 +71,18 @@ function speedpress_remove_block_editor_assets() {
     wp_dequeue_style('wp-block-library');
     wp_dequeue_style('wp-block-library-theme');
     wp_dequeue_style('wc-block-style'); // Remove WooCommerce block CSS if WooCommerce is used
+    wp_dequeue_style('global-styles'); // Remove Global Styles
 
     // Scripts
     wp_dequeue_script('wp-block-library');
     wp_dequeue_script('wp-block-library-theme');
+    wp_dequeue_script('wp-element');
+    wp_dequeue_script('wp-data');
+    wp_dequeue_script('wp-compose');
+    wp_dequeue_script('wp-hooks');
+    wp_dequeue_script('wp-rich-text');
+    wp_dequeue_script('wp-editor');
+    wp_dequeue_script('wp-blocks');
 }
 add_action('wp_enqueue_scripts', 'speedpress_remove_block_editor_assets', 100);
 
@@ -240,32 +248,30 @@ add_action('wp_before_admin_bar_render', 'speedpress_disable_comments_admin_bar_
 // Add theme support for Featured Images
 add_theme_support('post-thumbnails');
 
-//Change archive image size for optimization
-add_image_size('archive-banner', 582, 332, true); 
+// Change archive image size for optimization
+add_image_size('archive-banner', 582, 332, true);
 
-//Change hero image size for optimization
-add_image_size('hero-image',1980, 367, true); 
+// Change hero image size for optimization
+add_image_size('hero-image', 1980, 367, true);
 
-//Remove product zoom
-add_filter( 'woocommerce_single_product_zoom_enabled', '__return_false' );
+// Remove product zoom
+add_filter('woocommerce_single_product_zoom_enabled', '__return_false');
 
-// Removes Order Notes Title - Additional Information & Notes Field
-add_filter( 'woocommerce_enable_order_notes_field', '__return_false', 9999 );
+// Remove Order Notes Title - Additional Information & Notes Field
+add_filter('woocommerce_enable_order_notes_field', '__return_false', 9999);
 
 // Remove Order Notes Field
-add_filter( 'woocommerce_checkout_fields' , 'remove_order_notes' );
+add_filter('woocommerce_checkout_fields', 'remove_order_notes');
 
-function remove_order_notes( $fields ) {
-     unset($fields['order']['order_comments']);
-     return $fields;
+function remove_order_notes($fields) {
+    unset($fields['order']['order_comments']);
+    return $fields;
 }
 
 // Redirect cart to combined checkout page if cart is not empty
 function redirect_cart_to_combined_checkout() {
-    // Check if we are on the cart page and if the cart is not empty
     if (is_cart() && !WC()->cart->is_empty()) {
-        // Use WooCommerce function to get the checkout page URL
-        wp_redirect(wc_get_checkout_url()); 
+        wp_redirect(wc_get_checkout_url());
         exit;
     }
 }
@@ -273,11 +279,9 @@ add_action('template_redirect', 'redirect_cart_to_combined_checkout');
 
 // Redirect empty cart to shop page
 function redirect_empty_cart_to_shop() {
-    // Check if we are on the cart page and if the cart is empty
     if (is_cart() && WC()->cart->is_empty()) {
-        // Get the shop page URL from WooCommerce settings
         $shop_page_url = get_permalink(wc_get_page_id('shop'));
-        wp_redirect($shop_page_url); 
+        wp_redirect($shop_page_url);
         exit;
     }
 }
