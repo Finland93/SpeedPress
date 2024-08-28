@@ -32,12 +32,12 @@ $attributes = $product->get_attributes();
                     </div>
 
                     <!-- Carousel with thumbnails -->
-                    <div id="product-thumbnails-carousel" class="carousel slide" data-bs-ride="carousel" role="region" aria-label="Product Image Gallery">
+                    <div id="product-thumbnails-carousel" class="carousel slide" data-bs-ride="carousel">
                         <div class="carousel-inner">
                             <?php
                             $chunks = array_chunk($attachment_ids, 4); // Divide images into chunks of 4
                             foreach ($chunks as $index => $chunk) : ?>
-                                <div class="carousel-item <?php echo $index === 0 ? 'active' : ''; ?>" role="group">
+                                <div class="carousel-item <?php echo $index === 0 ? 'active' : ''; ?>">
                                     <div class="row">
                                         <?php foreach ($chunk as $attachment_id) :
                                             $thumbnail_url = wp_get_attachment_image_url($attachment_id, 'thumbnail');
@@ -147,8 +147,8 @@ $attributes = $product->get_attributes();
             </div>
             
             <div class="tab-content mt-3" id="product-tabs-content">
-                <div class="tab-pane fade show active" id="description" role="tabpanel" aria-labelledby="description-tab" itemprop="description">
-                    <?php echo apply_filters('the_content', $product->get_description()); ?>
+                <div class="tab-pane fade show active" id="description" role="tabpanel" aria-labelledby="description-tab">
+                     <?php echo apply_filters('the_content', $product->get_description()); ?>
                 </div>
                 
                 <div class="tab-pane fade" id="additional-details" role="tabpanel" aria-labelledby="additional-details-tab">
@@ -231,24 +231,22 @@ $attributes = $product->get_attributes();
     </div>
 </main>
 
-<!-- Modal for Large Image -->
+<!-- Modal for Main Product Image -->
 <div class="modal fade" id="image-modal" tabindex="-1" aria-labelledby="image-modal-label" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="image-modal-label"><?php esc_html_e('Product Image', 'woocommerce'); ?></h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?php esc_attr_e('Close', 'woocommerce'); ?>"></button>
             </div>
-            <div class="modal-body text-center">
-                <img id="modal-image" src="<?php echo esc_url($main_image_url); ?>" alt="<?php echo esc_attr($main_image_alt); ?>" class="img-fluid">
+            <div class="modal-body">
+                <img src="<?php echo esc_url($main_image_url); ?>" class="img-fluid" alt="<?php echo esc_attr($main_image_alt); ?>">
             </div>
         </div>
     </div>
 </div>
 
-<?php
-get_footer();
-?>
+<?php get_footer(); ?>
 
 <!-- JavaScript for image swap -->
 <script>
