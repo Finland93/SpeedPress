@@ -5,6 +5,9 @@ global $product;
 if (!$product) {
     $product = wc_get_product(get_the_ID());
 }
+
+// Fetch product attributes
+$attributes = $product->get_attributes();
 ?>
 
 <main class="container mt-5">
@@ -75,11 +78,10 @@ if (!$product) {
                         woocommerce_template_single_excerpt();
                     }
                     ?>
-                </div>				
+                </div>                
 
                 <div class="woocommerce-product-rating">
                     <?php
-                    // Display the product rating
                     if ($rating_count = $product->get_rating_count()) : ?>
                         <div itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
                             <meta itemprop="ratingValue" content="<?php echo esc_attr($product->get_average_rating()); ?>">
@@ -141,41 +143,64 @@ if (!$product) {
                     <a class="nav-link" id="attributes-tab" data-bs-toggle="tab" href="#attributes" role="tab" aria-controls="attributes" aria-selected="false"><?php esc_html_e('Attributes', 'woocommerce'); ?></a>
                 </li>
             </ul>
+            
             <div class="tab-content mt-3" id="product-tabs-content">
                 <div class="tab-pane fade show active" id="description" role="tabpanel" aria-labelledby="description-tab" itemprop="description">
-   					 <?php echo apply_filters('the_content', $product->get_description()); ?>
-				</div>
+                     <?php echo apply_filters('the_content', $product->get_description()); ?>
+                </div>
+                
                 <div class="tab-pane fade" id="additional-details" role="tabpanel" aria-labelledby="additional-details-tab">
-    				<?php if ($attributes = $product->get_attributes()) : ?>
-     				   <table class="table table-striped mt-3">
-           					 <?php foreach ($attributes as $attribute) : ?>
-              				  <?php if ($attribute->get_variation()) continue; ?>
-             				   <tr>
-                 				   <th><?php echo wc_attribute_label($attribute->get_name()); ?></th>
-                				    <td><?php echo implode(', ', $product->get_attribute($attribute->get_name())); ?></td>
-            		 		   </tr>
-   		        		 <?php endforeach; ?>
-  		    		  </table>
-		 		   <?php else : ?>
-  		  		    <p><?php esc_html_e('No additional details available.', 'woocommerce'); ?></p>
-   				 <?php endif; ?>
-				</div>
+                    <table class="PR-table table-striped mt-3">
+                        <tr>
+                            <th><?php esc_html_e('Price:', 'woocommerce'); ?></th>
+                            <td><?php echo wp_kses_post($product->get_price_html()); ?></td>
+                        </tr>
+                        <tr>
+                            <th><?php esc_html_e('Sale Price:', 'woocommerce'); ?></th>
+                            <td><?php echo $product->is_on_sale() ? wp_kses_post($product->get_sale_price()) : '&mdash;'; ?></td>
+                        </tr>
+                        <tr>
+                            <th><?php esc_html_e('Weight:', 'woocommerce'); ?></th>
+                            <td><?php echo $product->get_weight() ? esc_html($product->get_weight()) . ' ' . get_option('woocommerce_weight_unit') : '&mdash;'; ?></td>
+                        </tr>
+                        <tr>
+                            <th><?php esc_html_e('SKU:', 'woocommerce'); ?></th>
+                            <td><?php echo esc_html($product->get_sku()); ?></td>
+                        </tr>
+                        <tr>
+                            <th><?php esc_html_e('Dimensions:', 'woocommerce'); ?></th>
+                            <td><?php 
+                                $dimensions = $product->get_dimensions(false);
+                                echo $dimensions ? esc_html($dimensions) : '&mdash;';
+                            ?></td>
+                        </tr>
+                    </table>
+                </div>
 
-				<div class="tab-pane fade" id="attributes" role="tabpanel" aria-labelledby="attributes-tab">
-				    <?php if ($attributes = $product->get_attributes()) : ?>
-				        <table class="table table-striped mt-3">
-				            <?php foreach ($attributes as $attribute) : ?>
-				                <?php if ($attribute->get_variation()) continue; ?>
-				                <tr>
- 				                   <th><?php echo wc_attribute_label($attribute->get_name()); ?></th>
-				                    <td><?php echo implode(', ', $product->get_attribute($attribute->get_name())); ?></td>
-				                </tr>
-				            <?php endforeach; ?>
-				        </table>
-				    <?php else : ?>
-				        <p><?php esc_html_e('No attributes available.', 'woocommerce'); ?></p>
-				    <?php endif; ?>
-				</div>
+                <div class="tab-pane fade" id="attributes" role="tabpanel" aria-labelledby="attributes-tab">
+                    <?php if ($attributes) : ?>
+                        <table class="PR-table table-striped mt-3">
+                            <?php foreach ($attributes as $attribute) : ?>
+                                <?php
+                                // Skip variation attributes
+                                if ($attribute->get_variation()) continue;
+                                // Get attribute name and value
+                                $attribute_name = wc_attribute_label($attribute->get_name());
+                                $attribute_value = $product->get_attribute($attribute->get_name());
+
+                                // Ensure attribute value is valid
+                                $attribute_value = is_string($attribute_value) ? wp_kses_post($attribute_value) : '&mdash;';
+                                ?>
+                                <tr>
+                                    <th><?php echo esc_html($attribute_name); ?></th>
+                                    <td><?php echo $attribute_value; ?></td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </table>
+                    <?php else : ?>
+                        <p><?php esc_html_e('No attributes available.', 'woocommerce'); ?></p>
+                    <?php endif; ?>
+                </div>
 
             </div>
         </div>
@@ -187,7 +212,7 @@ if (!$product) {
             <div class="mt-5">
                 <h2><?php esc_html_e('You may also like...', 'woocommerce'); ?></h2>
                 <?php
-                woocommerce_upsell_display(4, 4); // Display 4 upsells in 4 columns
+                woocommerce_upsell_display(4, 4); 
                 ?>
             </div>
         <?php endif; ?>
@@ -197,8 +222,8 @@ if (!$product) {
             <h2><?php esc_html_e('Related products', 'woocommerce'); ?></h2>
             <?php
             woocommerce_output_related_products(array(
-                'posts_per_page' => 4, // Number of related products
-                'columns' => 4,        // Number of columns
+                'posts_per_page' => 4,
+                'columns' => 4,       
             ));
             ?>
         </div>
