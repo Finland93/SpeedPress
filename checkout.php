@@ -67,6 +67,8 @@ get_header(); ?>
                         </form>
                         <div class="cart-totals mt-4 bg-white p-3 border rounded shadow-sm">
                             <strong><?php esc_html_e('Total:', 'woocommerce'); ?></strong> <?php echo WC()->cart->get_cart_total(); ?>
+							<button type="submit" name="update_cart" class="btn btn-primary updateCart"><?php esc_html_e('Update Cart', 'woocommerce'); ?></button>
+
                         </div>
                     <?php else: ?>
                         <div class="alert alert-info"><?php esc_html_e('Your cart is currently empty.', 'woocommerce'); ?></div>
