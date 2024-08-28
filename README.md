@@ -6,7 +6,8 @@ Explore our templates and get started for free at [SpeedPress](https://speedpres
 
 ## Why Choose SpeedPress?
 
-SpeedPress revolutionizes WordPress by combining the speed and engagement of pure HTML with the versatility of Bootstrap 5. Say goodbye to jQuery and Gutenberg, and hello to a cleaner, more efficient website-building experience.
+SpeedPress transforms WordPress by merging the lightning-fast performance of pure HTML with the flexibility of Bootstrap 5. Say goodbye to jQuery and Gutenberg, and embrace a more streamlined, efficient website-building experience. With SpeedPress, you also benefit from built-in WooCommerce support, including automatic integration of product schemas on your product pages.
+
 
 ### Key Features:
 
