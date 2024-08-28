@@ -6,7 +6,6 @@ Author URI: https://github.com/Finland93/SpeedPress
 Description: Lightweight WordPress theme without block editors and using only Bootstrap 5, this theme is for persons who likes to build HTML websites, checkout our free templates from our home page.
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Text Domain: DEV-Theme
 */
 
 /* Typography */
@@ -225,87 +224,46 @@ footer a {
 
 
 /* WooCommerce */
+.updateCart {float: right!important;}
+.form-row, .woocommerce-input-wrapper > input {display: block; width: 100% !important;}
+.woocommerce-checkout-review-order-table {width: 50%!important; float: left!important;}
+#payment{width: 50%!important; float: right!important;}
+#order_review {display: inline-block;}
 
-.woocommerce .card {
-    transition: all 0.3s ease-in-out;
-}
 
-.woocommerce .card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-}
-
-.woocommerce .product_title {
-    font-size: 2rem;
-    margin-bottom: 1rem;
-}
-
-.woocommerce .woocommerce-product-rating {
-    margin-bottom: 1rem;
-}
-
-.woocommerce .woocommerce-product-price {
-    margin-bottom: 1rem;
-}
-
-.woocommerce .woocommerce-product-description {
-    margin-bottom: 2rem;
-}
-
-.woocommerce .woocommerce-product-add-to-cart {
-    margin-bottom: 2rem;
-}
-
-.woocommerce .btn {
-    background-color: #007bff;
-    border: none;
-    padding: 0.5rem 1rem;
-    text-transform: uppercase;
-    font-weight: bold;
-}
-
-.woocommerce .btn:hover {
-    background-color: #0056b3;
+.product-image {
+    width: 80px; 
+    height: auto;
+    display: block;
+    margin: 0 auto; 
+    border-radius: 5px; 
 }
 
 
-#cart-section h2,
-#checkout-section h2 {
-    font-size: 2rem;
-    margin-bottom: 1.5rem;
-    text-align: center;
+.table th, .table td {
+    vertical-align: middle;
+    text-align: center; 
 }
 
-#cart-section {
-    border-bottom: 1px solid #ddd;
-    padding-bottom: 2rem;
+.product-link {
+    text-decoration: none;
+    color: #333;
+    display: inline-block;
+    margin-left: 10px;
 }
 
-#checkout-section {
-    padding-top: 2rem;
+
+.product-link:hover {
+    color: #007bff;
+    text-decoration: underline;
 }
 
-.woocommerce-cart-form table {
-    width: 100%;
-    margin-bottom: 2rem;
+.table {
+    margin-bottom: 0; /* Remove bottom margin */
 }
 
-.woocommerce-checkout-review-order {
-    margin-top: 2rem;
-}
-
-.woocommerce-cart-form button,
-.woocommerce-checkout-review-order button {
-    background-color: #007bff;
-    color: #fff;
-    padding: 0.5rem 1rem;
-    text-transform: uppercase;
-    font-weight: bold;
-    border: none;
-    margin-top: 1rem;
-}
-
-.woocommerce-cart-form button:hover,
-.woocommerce-checkout-review-order button:hover {
-    background-color: #0056b3;
+@media (max-width: 768px) {
+    .product-image {
+        width: 60px; /* Adjust size for smaller screens */
+    }
 }
