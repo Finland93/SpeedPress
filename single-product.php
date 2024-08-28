@@ -2,7 +2,7 @@
 
 <main class="container mt-5">
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-12">
             <?php
             while (have_posts()) :
                 the_post();
@@ -17,12 +17,6 @@
 
             endwhile;
             ?>
-        </div>
-
-        <div class="col-md-4">
-            <aside class="sidebar">
-                <?php get_sidebar(); ?>
-            </aside>
         </div>
     </div>
 </main>
