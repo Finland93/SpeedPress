@@ -113,18 +113,26 @@ $attributes = $product->get_attributes();
                     }
                     ?>
                 </div>
+				<!-- Product Meta Information -->
+				<div class="woocommerce-product-meta">
+  				  <?php if ($sku = $product->get_sku()) : ?>
+ 				       <p><strong><?php esc_html_e('SKU:', 'woocommerce'); ?></strong> <?php echo esc_html($sku); ?></p>
+ 				   <?php endif; ?>
 
-                <div class="woocommerce-product-meta">
-                    <ul>
-                        <?php if ($sku = $product->get_sku()) : ?>
-                            <li><strong><?php esc_html_e('SKU:', 'woocommerce'); ?></strong> <?php echo esc_html($sku); ?></li>
-                        <?php endif; ?>
+   				 <?php if ($categories = wc_get_product_category_list($product->get_id(), ', ', '<span>', '</span>')) : ?>
+ 				       <p><strong><?php esc_html_e('Categories:', 'woocommerce'); ?></strong> <?php echo $categories; ?></p>
+ 				   <?php endif; ?>
 
-                        <?php if ($brand = get_post_meta($product->get_id(), '_brand', true)) : ?>
-                            <li><strong><?php esc_html_e('Brand:', 'woocommerce'); ?></strong> <?php echo esc_html($brand); ?></li>
-                        <?php endif; ?>
-                    </ul>
-                </div>
+				    <?php if ($brand = get_post_meta($product->get_id(), '_brand', true)) : ?>
+ 				       <p><strong><?php esc_html_e('Brand:', 'woocommerce'); ?></strong> <?php echo esc_html($brand); ?></p>
+				    <?php endif; ?>
+
+				    <?php if ($tags = wc_get_product_tag_list($product->get_id(), ', ', '<span>', '</span>')) : ?>
+				        <p><strong><?php esc_html_e('Tags:', 'woocommerce'); ?></strong> <?php echo $tags; ?></p>
+				    <?php endif; ?>
+				</div>
+
+
             </div>
         </div>
 
@@ -142,68 +150,63 @@ $attributes = $product->get_attributes();
                         <a class="nav-link" id="attributes-tab" data-bs-toggle="tab" href="#attributes" role="tab" aria-controls="attributes" aria-selected="false"><?php esc_html_e('Attributes', 'woocommerce'); ?></a>
                     </li>
                 </ul>
-            </div>
-            
-            <div class="tab-content mt-3" id="product-tabs-content">
-                <div class="tab-pane fade show active" id="description" role="tabpanel" aria-labelledby="description-tab">
-                     <?php echo apply_filters('the_content', $product->get_description()); ?>
-                </div>
-                
-                <div class="tab-pane fade" id="additional-details" role="tabpanel" aria-labelledby="additional-details-tab">
-                    <table class="PR-table mt-3">
-                        <thead>
-                            <tr>
-                                <th scope="col"><?php esc_html_e('Attribute', 'woocommerce'); ?></th>
-                                <th scope="col"><?php esc_html_e('Value', 'woocommerce'); ?></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <th scope="row"><?php esc_html_e('Price:', 'woocommerce'); ?></th>
-                                <td><?php echo wp_kses_post($product->get_price_html()); ?></td>
-                            </tr>
-                            <tr>
-                                <th scope="row"><?php esc_html_e('Sale Price:', 'woocommerce'); ?></th>
-                                <td><?php echo $product->is_on_sale() ? wp_kses_post($product->get_sale_price()) : '&mdash;'; ?></td>
-                            </tr>
-                            <tr>
-                                <th scope="row"><?php esc_html_e('Weight:', 'woocommerce'); ?></th>
-                                <td><?php echo $product->get_weight() ? esc_html($product->get_weight()) . ' ' . get_option('woocommerce_weight_unit') : '&mdash;'; ?></td>
-                            </tr>
-                            <tr>
-                                <th scope="row"><?php esc_html_e('SKU:', 'woocommerce'); ?></th>
-                                <td><?php echo esc_html($product->get_sku()); ?></td>
-                            </tr>
-                            <tr>
-                                <th scope="row"><?php esc_html_e('Dimensions:', 'woocommerce'); ?></th>
-                                <td><?php echo $product->get_dimensions() ? esc_html($product->get_dimensions()) : '&mdash;'; ?></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                
-                <div class="tab-pane fade" id="attributes" role="tabpanel" aria-labelledby="attributes-tab">
-                    <table class="PR-table mt-3">
-                        <thead>
-                            <tr>
-                                <th scope="col"><?php esc_html_e('Attribute', 'woocommerce'); ?></th>
-                                <th scope="col"><?php esc_html_e('Value', 'woocommerce'); ?></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php foreach ($attributes as $attribute) :
-                                if ($attribute->get_variation()) continue;
-                                $attribute_name = wc_attribute_label($attribute->get_name());
-                                $attribute_value = $product->get_attribute($attribute->get_name());
-                                $attribute_value = is_string($attribute_value) ? wp_kses_post($attribute_value) : '&mdash;';
-                            ?>
+                <div class="tab-content mt-3" id="product-tabs-content">
+                    <div class="tab-pane fade show active" id="description" role="tabpanel" aria-labelledby="description-tab">
+                         <?php echo apply_filters('the_content', $product->get_description()); ?>
+                    </div>
+                    
+                    <div class="tab-pane fade" id="additional-details" role="tabpanel" aria-labelledby="additional-details-tab">
+                        <table class="PR-table mt-3">
+                            <thead>
                                 <tr>
-                                    <th scope="row"><?php echo esc_html($attribute_name); ?></th>
-                                    <td><?php echo $attribute_value; ?></td>
+                                    <th scope="col"><?php esc_html_e('Attribute', 'woocommerce'); ?></th>
+                                    <th scope="col"><?php esc_html_e('Value', 'woocommerce'); ?></th>
                                 </tr>
-                            <?php endforeach; ?>
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row"><?php esc_html_e('Price:', 'woocommerce'); ?></th>
+                                    <td><?php echo wp_kses_post($product->get_price_html()); ?></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row"><?php esc_html_e('Weight:', 'woocommerce'); ?></th>
+                                    <td><?php echo $product->get_weight() ? esc_html($product->get_weight()) . ' ' . get_option('woocommerce_weight_unit') : '&mdash;'; ?></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row"><?php esc_html_e('SKU:', 'woocommerce'); ?></th>
+                                    <td><?php echo esc_html($product->get_sku()); ?></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row"><?php esc_html_e('Dimensions:', 'woocommerce'); ?></th>
+                                    <td><?php echo $product->get_dimensions() ? esc_html($product->get_dimensions()) : '&mdash;'; ?></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="tab-pane fade" id="attributes" role="tabpanel" aria-labelledby="attributes-tab">
+                        <table class="PR-table mt-3">
+                            <thead>
+                                <tr>
+                                    <th scope="col"><?php esc_html_e('Attribute', 'woocommerce'); ?></th>
+                                    <th scope="col"><?php esc_html_e('Value', 'woocommerce'); ?></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($attributes as $attribute) :
+                                    if ($attribute->get_variation()) continue;
+                                    $attribute_name = wc_attribute_label($attribute->get_name());
+                                    $attribute_value = $product->get_attribute($attribute->get_name());
+                                    $attribute_value = is_string($attribute_value) ? wp_kses_post($attribute_value) : '&mdash;';
+                                ?>
+                                    <tr>
+                                        <th scope="row"><?php echo esc_html($attribute_name); ?></th>
+                                        <td><?php echo $attribute_value; ?></td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
