@@ -265,4 +265,50 @@ add_image_size('archive-banner', 582, 332, true);
 add_image_size('hero-image',1980, 367, true); 
 
 //Remove product zoom
-remove_theme_support('wc-product-gallery-zoom');
+add_filter( 'woocommerce_single_product_zoom_enabled', '__return_false' );
+
+// Removes Order Notes Title - Additional Information & Notes Field
+add_filter( 'woocommerce_enable_order_notes_field', '__return_false', 9999 );
+
+// Remove Order Notes Field
+add_filter( 'woocommerce_checkout_fields' , 'remove_order_notes' );
+
+function remove_order_notes( $fields ) {
+     unset($fields['order']['order_comments']);
+     return $fields;
+}
+
+// Redirect cart to combined checkout page if cart is not empty
+function redirect_cart_to_combined_checkout() {
+    // Check if we are on the cart page and if the cart is not empty
+    if (is_cart() && !WC()->cart->is_empty()) {
+        // Use WooCommerce function to get the checkout page URL
+        wp_redirect(wc_get_checkout_url()); 
+        exit;
+    }
+}
+add_action('template_redirect', 'redirect_cart_to_combined_checkout');
+
+// Redirect empty cart to shop page
+function redirect_empty_cart_to_shop() {
+    // Check if we are on the cart page and if the cart is empty
+    if (is_cart() && WC()->cart->is_empty()) {
+        // Get the shop page URL from WooCommerce settings
+        $shop_page_url = get_permalink(wc_get_page_id('shop'));
+        wp_redirect($shop_page_url); 
+        exit;
+    }
+}
+add_action('template_redirect', 'redirect_empty_cart_to_shop');
+
+// Set custom checkout template
+function custom_checkout_template($template) {
+    if (is_checkout()) {
+        $custom_template = locate_template('checkout.php');
+        if ($custom_template) {
+            return $custom_template;
+        }
+    }
+    return $template;
+}
+add_filter('template_include', 'custom_checkout_template');
