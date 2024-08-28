@@ -222,3 +222,90 @@ footer a {
         margin-top: 10px;
     }
 }
+
+
+/* WooCommerce */
+
+.woocommerce .card {
+    transition: all 0.3s ease-in-out;
+}
+
+.woocommerce .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.woocommerce .product_title {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.woocommerce .woocommerce-product-rating {
+    margin-bottom: 1rem;
+}
+
+.woocommerce .woocommerce-product-price {
+    margin-bottom: 1rem;
+}
+
+.woocommerce .woocommerce-product-description {
+    margin-bottom: 2rem;
+}
+
+.woocommerce .woocommerce-product-add-to-cart {
+    margin-bottom: 2rem;
+}
+
+.woocommerce .btn {
+    background-color: #007bff;
+    border: none;
+    padding: 0.5rem 1rem;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.woocommerce .btn:hover {
+    background-color: #0056b3;
+}
+
+
+#cart-section h2,
+#checkout-section h2 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+#cart-section {
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 2rem;
+}
+
+#checkout-section {
+    padding-top: 2rem;
+}
+
+.woocommerce-cart-form table {
+    width: 100%;
+    margin-bottom: 2rem;
+}
+
+.woocommerce-checkout-review-order {
+    margin-top: 2rem;
+}
+
+.woocommerce-cart-form button,
+.woocommerce-checkout-review-order button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 0.5rem 1rem;
+    text-transform: uppercase;
+    font-weight: bold;
+    border: none;
+    margin-top: 1rem;
+}
+
+.woocommerce-cart-form button:hover,
+.woocommerce-checkout-review-order button:hover {
+    background-color: #0056b3;
+}
