@@ -32,7 +32,7 @@ $attributes = $product->get_attributes();
                     </div>
 
                     <!-- Carousel with thumbnails -->
-                    <div id="product-thumbnails-carousel" class="carousel slide" data-bs-ride="carousel" aria-label="Product Image Gallery" role="region" aria-roledescription="carousel">
+                    <div id="product-thumbnails-carousel" class="carousel slide" data-bs-ride="carousel" aria-label="<?php esc_attr_e('Product Image Gallery', 'woocommerce'); ?>" role="region" aria-roledescription="carousel">
                         <div class="carousel-inner">
                             <?php
                             $chunks = array_chunk($attachment_ids, 4); // Divide images into chunks of 4
@@ -113,32 +113,30 @@ $attributes = $product->get_attributes();
                     }
                     ?>
                 </div>
-				<!-- Product Meta Information -->
-				<div class="woocommerce-product-meta">
-  				  <?php if ($sku = $product->get_sku()) : ?>
- 				       <p><strong><?php esc_html_e('SKU:', 'woocommerce'); ?></strong> <?php echo esc_html($sku); ?></p>
- 				   <?php endif; ?>
+                <!-- Product Meta Information -->
+                <div class="woocommerce-product-meta">
+                    <?php if ($sku = $product->get_sku()) : ?>
+                        <p><strong><?php esc_html_e('SKU:', 'woocommerce'); ?></strong> <?php echo esc_html($sku); ?></p>
+                    <?php endif; ?>
 
-   				 <?php if ($categories = wc_get_product_category_list($product->get_id(), ', ', '<span>', '</span>')) : ?>
- 				       <p><strong><?php esc_html_e('Categories:', 'woocommerce'); ?></strong> <?php echo $categories; ?></p>
- 				   <?php endif; ?>
+                    <?php if ($categories = wc_get_product_category_list($product->get_id(), ', ', '<span>', '</span>')) : ?>
+                        <p><strong><?php esc_html_e('Categories:', 'woocommerce'); ?></strong> <?php echo $categories; ?></p>
+                    <?php endif; ?>
 
-				    <?php if ($brand = get_post_meta($product->get_id(), '_brand', true)) : ?>
- 				       <p><strong><?php esc_html_e('Brand:', 'woocommerce'); ?></strong> <?php echo esc_html($brand); ?></p>
-				    <?php endif; ?>
+                    <?php if ($brand = get_post_meta($product->get_id(), '_brand', true)) : ?>
+                        <p><strong><?php esc_html_e('Brand:', 'woocommerce'); ?></strong> <?php echo esc_html($brand); ?></p>
+                    <?php endif; ?>
 
-				    <?php if ($tags = wc_get_product_tag_list($product->get_id(), ', ', '<span>', '</span>')) : ?>
-				        <p><strong><?php esc_html_e('Tags:', 'woocommerce'); ?></strong> <?php echo $tags; ?></p>
-				    <?php endif; ?>
-				</div>
-
-
+                    <?php if ($tags = wc_get_product_tag_list($product->get_id(), ', ', '<span>', '</span>')) : ?>
+                        <p><strong><?php esc_html_e('Tags:', 'woocommerce'); ?></strong> <?php echo $tags; ?></p>
+                    <?php endif; ?>
+                </div>
             </div>
         </div>
 
         <!-- Tabs for Description and Additional Details -->
         <div class="mt-4">
-            <div role="tablist" aria-label="Product Information Tabs">
+            <div role="tablist" aria-label="<?php esc_attr_e('Product Information Tabs', 'woocommerce'); ?>">
                 <ul class="nav nav-tabs" id="product-tabs" role="tablist">
                     <li class="nav-item" role="presentation">
                         <a class="nav-link active" id="description-tab" data-bs-toggle="tab" href="#description" role="tab" aria-controls="description" aria-selected="true"><?php esc_html_e('Description', 'woocommerce'); ?></a>
@@ -152,7 +150,7 @@ $attributes = $product->get_attributes();
                 </ul>
                 <div class="tab-content mt-3" id="product-tabs-content">
                     <div class="tab-pane fade show active" id="description" role="tabpanel" aria-labelledby="description-tab">
-                         <?php echo apply_filters('the_content', $product->get_description()); ?>
+                        <?php echo apply_filters('the_content', $product->get_description()); ?>
                     </div>
                     
                     <div class="tab-pane fade" id="additional-details" role="tabpanel" aria-labelledby="additional-details-tab">
