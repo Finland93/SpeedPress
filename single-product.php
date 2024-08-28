@@ -32,12 +32,12 @@ $attributes = $product->get_attributes();
                     </div>
 
                     <!-- Carousel with thumbnails -->
-                    <div id="product-thumbnails-carousel" class="carousel slide" data-bs-ride="carousel">
+                    <div id="product-thumbnails-carousel" class="carousel slide" data-bs-ride="carousel" role="region" aria-label="Product Image Gallery">
                         <div class="carousel-inner">
                             <?php
                             $chunks = array_chunk($attachment_ids, 4); // Divide images into chunks of 4
                             foreach ($chunks as $index => $chunk) : ?>
-                                <div class="carousel-item <?php echo $index === 0 ? 'active' : ''; ?>">
+                                <div class="carousel-item <?php echo $index === 0 ? 'active' : ''; ?>" role="group">
                                     <div class="row">
                                         <?php foreach ($chunk as $attachment_id) :
                                             $thumbnail_url = wp_get_attachment_image_url($attachment_id, 'thumbnail');
@@ -132,21 +132,23 @@ $attributes = $product->get_attributes();
 
         <!-- Tabs for Description and Additional Details -->
         <div class="mt-4">
-            <ul class="nav nav-tabs" id="product-tabs" role="tablist">
-                <li class="nav-item">
-                    <a class="nav-link active" id="description-tab" data-bs-toggle="tab" href="#description" role="tab" aria-controls="description" aria-selected="true"><?php esc_html_e('Description', 'woocommerce'); ?></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="additional-details-tab" data-bs-toggle="tab" href="#additional-details" role="tab" aria-controls="additional-details" aria-selected="false"><?php esc_html_e('Additional Details', 'woocommerce'); ?></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="attributes-tab" data-bs-toggle="tab" href="#attributes" role="tab" aria-controls="attributes" aria-selected="false"><?php esc_html_e('Attributes', 'woocommerce'); ?></a>
-                </li>
-            </ul>
+            <div role="tablist" aria-label="Product Information Tabs">
+                <ul class="nav nav-tabs" id="product-tabs">
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link active" id="description-tab" data-bs-toggle="tab" href="#description" role="tab" aria-controls="description" aria-selected="true"><?php esc_html_e('Description', 'woocommerce'); ?></a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" id="additional-details-tab" data-bs-toggle="tab" href="#additional-details" role="tab" aria-controls="additional-details" aria-selected="false"><?php esc_html_e('Additional Details', 'woocommerce'); ?></a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" id="attributes-tab" data-bs-toggle="tab" href="#attributes" role="tab" aria-controls="attributes" aria-selected="false"><?php esc_html_e('Attributes', 'woocommerce'); ?></a>
+                    </li>
+                </ul>
+            </div>
             
             <div class="tab-content mt-3" id="product-tabs-content">
                 <div class="tab-pane fade show active" id="description" role="tabpanel" aria-labelledby="description-tab" itemprop="description">
-                     <?php echo apply_filters('the_content', $product->get_description()); ?>
+                    <?php echo apply_filters('the_content', $product->get_description()); ?>
                 </div>
                 
                 <div class="tab-pane fade" id="additional-details" role="tabpanel" aria-labelledby="additional-details-tab">
@@ -201,7 +203,6 @@ $attributes = $product->get_attributes();
                         <p><?php esc_html_e('No attributes available.', 'woocommerce'); ?></p>
                     <?php endif; ?>
                 </div>
-
             </div>
         </div>
 
@@ -227,7 +228,6 @@ $attributes = $product->get_attributes();
             ));
             ?>
         </div>
-
     </div>
 </main>
 
