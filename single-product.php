@@ -32,7 +32,7 @@ $attributes = $product->get_attributes();
                     </div>
 
                     <!-- Carousel with thumbnails -->
-                    <div id="product-thumbnails-carousel" class="carousel slide" data-bs-ride="carousel">
+                    <div id="product-thumbnails-carousel" class="carousel slide" data-bs-ride="carousel" aria-label="Product Image Gallery">
                         <div class="carousel-inner">
                             <?php
                             $chunks = array_chunk($attachment_ids, 4); // Divide images into chunks of 4
@@ -54,11 +54,11 @@ $attributes = $product->get_attributes();
                         </div>
 
                         <!-- Carousel controls -->
-                        <a class="carousel-control-prev" href="#product-thumbnails-carousel" role="button" data-bs-slide="prev">
+                        <a class="carousel-control-prev" href="#product-thumbnails-carousel" role="button" data-bs-slide="prev" aria-label="Previous">
                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                             <span class="visually-hidden"><?php esc_html_e('Previous', 'woocommerce'); ?></span>
                         </a>
-                        <a class="carousel-control-next" href="#product-thumbnails-carousel" role="button" data-bs-slide="next">
+                        <a class="carousel-control-next" href="#product-thumbnails-carousel" role="button" data-bs-slide="next" aria-label="Next">
                             <span class="carousel-control-next-icon" aria-hidden="true"></span>
                             <span class="visually-hidden"><?php esc_html_e('Next', 'woocommerce'); ?></span>
                         </a>
