@@ -13,7 +13,7 @@ get_header(); ?>
                 if (WC()->cart) {
                     $cart = WC()->cart->get_cart();
                     if (!empty($cart)) : ?>
-                        <form action="<?php echo esc_url(wc_get_cart_url()); ?>" method="post">
+                        <form action="<?php echo esc_url(wc_get_cart_url()); ?>" method="post" class="woocommerce-cart-form">
                             <table class="table table-striped table-bordered">
                                 <thead>
                                     <tr>
@@ -52,7 +52,8 @@ get_header(); ?>
                                             </td>
                                             <td><?php echo $product_price; ?></td>
                                             <td>
-                                                <input type="number" name="cart[<?php echo esc_attr($cart_item_key); ?>][qty]" value="<?php echo esc_attr($product_quantity); ?>" class="form-control form-control-sm" min="1">
+                                                <!-- Display Quantity Instead of Input -->
+                                                <span><?php echo esc_html($product_quantity); ?></span>
                                             </td>
                                             <td><?php echo $product_total; ?></td>
                                             <td>
@@ -67,8 +68,6 @@ get_header(); ?>
                         </form>
                         <div class="cart-totals mt-4 bg-white p-3 border rounded shadow-sm">
                             <strong><?php esc_html_e('Total:', 'woocommerce'); ?></strong> <?php echo WC()->cart->get_cart_total(); ?>
-							<button type="submit" name="update_cart" class="btn btn-primary updateCart"><?php esc_html_e('Update Cart', 'woocommerce'); ?></button>
-
                         </div>
                     <?php else: ?>
                         <div class="alert alert-info"><?php esc_html_e('Your cart is currently empty.', 'woocommerce'); ?></div>
@@ -78,7 +77,6 @@ get_header(); ?>
                 }
                 ?>
             </section>
-
 
             <!-- Checkout Form -->
             <section class="checkout-form bg-light p-4 rounded shadow-sm">
