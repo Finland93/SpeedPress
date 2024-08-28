@@ -17,29 +17,11 @@ function speedpress_enqueue_styles_scripts() {
 
     // Scripts
     wp_enqueue_script('bootstrap-js', get_template_directory_uri() . '/js/bootstrap.bundle.min.js', array(), '5.3.0', true);
+
+    // Ensure jQuery is loaded on all pages
+    wp_enqueue_script('jquery');
 }
 add_action('wp_enqueue_scripts', 'speedpress_enqueue_styles_scripts');
-
-// Remove jQuery from non-WooCommerce pages
-function speedpress_conditional_jquery() {
-    // Check if it's NOT a WooCommerce page
-    if (!function_exists('is_woocommerce') || !is_woocommerce()) {
-        // Deregister jQuery on non-WooCommerce pages
-        wp_deregister_script('jquery');
-    }
-}
-add_action('wp_enqueue_scripts', 'speedpress_conditional_jquery', 1);
-
-// Load jQuery on WooCommerce pages
-function enqueue_jquery_for_woocommerce() {
-    // Check if it's a WooCommerce page
-    if (function_exists('is_woocommerce') && is_woocommerce()) {
-        // Register and enqueue the version of jQuery WooCommerce needs
-        wp_register_script('jquery', includes_url('/js/jquery/jquery.min.js'), false, NULL, true);
-        wp_enqueue_script('jquery');
-    }
-}
-add_action('wp_enqueue_scripts', 'enqueue_jquery_for_woocommerce', 5);
 
 // Remove jQuery Migrate
 function speedpress_remove_jquery_migrate($scripts) {
@@ -312,3 +294,4 @@ function custom_checkout_template($template) {
     return $template;
 }
 add_filter('template_include', 'custom_checkout_template');
+?>
