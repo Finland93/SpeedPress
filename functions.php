@@ -258,20 +258,6 @@ add_image_size('hero-image', 1980, 367, true);
 
 // Check if WooCommerce is active
 if ( class_exists( 'WooCommerce' ) ) {
-
-    // WooCommerce widgets
-    function speedpress_register_Woo_sidebar_widgets() {
-        register_sidebar( array(
-            'name'          => 'Shop Sidebar',
-            'id'            => 'shop-sidebar',
-            'before_widget' => '<div class="widget">',
-            'after_widget'  => '</div>',
-            'before_title'  => '<h3 class="widget-title">',
-            'after_title'   => '</h3>',
-        ) );
-    }
-    add_action( 'widgets_init', 'speedpress_register_Woo_sidebar_widgets' );
-
     // Remove product zoom
     add_filter('woocommerce_single_product_zoom_enabled', '__return_false');
 
@@ -316,5 +302,5 @@ if ( class_exists( 'WooCommerce' ) ) {
         return $template;
     }
     add_filter('template_include', 'speedpress_checkout_template');
-
+	
 }
