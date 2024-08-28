@@ -266,24 +266,3 @@ add_image_size('hero-image',1980, 367, true);
 
 //Remove product zoom
 remove_theme_support('wc-product-gallery-zoom');
-
-// Function to display cart and checkout on the same page
-function sales_funnel_woocommerce_add_cart_to_checkout_page() {
-    $options = get_option('sales_funnel_woocommerce_options');
-    $add_cart_to_checkout_page = isset($options['add_cart_to_checkout_page']) && $options['add_cart_to_checkout_page'] === 'on';
-
-    // Check if we are on the checkout page and the option is enabled
-    if (is_checkout() && $add_cart_to_checkout_page) {
-        // Display cart contents
-        echo '<div class="woocommerce-cart">';
-        echo do_shortcode('[woocommerce_cart]');
-        echo '</div>';
-    }
-
-    // Display the checkout form
-    echo '<div class="woocommerce-checkout">';
-    echo do_shortcode('[woocommerce_checkout]');
-    echo '</div>';
-}
-
-add_action('woocommerce_before_checkout_form', 'sales_funnel_woocommerce_add_cart_to_checkout_page', 5);
