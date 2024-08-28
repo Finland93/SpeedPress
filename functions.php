@@ -16,18 +16,30 @@ function speedpress_enqueue_styles_scripts() {
     wp_enqueue_style('custom-fonts', get_template_directory_uri() . '/fonts.css', array(), '1.0.0');
 
     // Scripts
-    wp_enqueue_script('bootstrap-js', get_template_directory_uri() . '/js/bootstrap.bundle.min.js', array('jquery'), '5.3.0', true);
+    wp_enqueue_script('bootstrap-js', get_template_directory_uri() . '/js/bootstrap.bundle.min.js', array(), '5.3.0', true);
 }
 add_action('wp_enqueue_scripts', 'speedpress_enqueue_styles_scripts');
 
-// Remove jQuery from WordPress
-function speedpress_remove_jquery() {
-    if (!is_admin()) {
+// Remove jQuery from non-WooCommerce pages
+function speedpress_conditional_jquery() {
+    // Check if it's NOT a WooCommerce page
+    if (!function_exists('is_woocommerce') || !is_woocommerce()) {
+        // Deregister jQuery on non-WooCommerce pages
         wp_deregister_script('jquery');
-        wp_register_script('jquery', false);
     }
 }
-add_action('wp_enqueue_scripts', 'speedpress_remove_jquery');
+add_action('wp_enqueue_scripts', 'speedpress_conditional_jquery', 1);
+
+// Load jQuery on WooCommerce pages
+function enqueue_jquery_for_woocommerce() {
+    // Check if it's a WooCommerce page
+    if (function_exists('is_woocommerce') && is_woocommerce()) {
+        // Register and enqueue the version of jQuery WooCommerce needs
+        wp_register_script('jquery', includes_url('/js/jquery/jquery.min.js'), false, NULL, true);
+        wp_enqueue_script('jquery');
+    }
+}
+add_action('wp_enqueue_scripts', 'enqueue_jquery_for_woocommerce', 5);
 
 // Remove jQuery Migrate
 function speedpress_remove_jquery_migrate($scripts) {
@@ -251,3 +263,27 @@ add_image_size('archive-banner', 582, 332, true);
 
 //Change hero image size for optimization
 add_image_size('hero-image',1980, 367, true); 
+
+//Remove product zoom
+remove_theme_support('wc-product-gallery-zoom');
+
+// Function to display cart and checkout on the same page
+function sales_funnel_woocommerce_add_cart_to_checkout_page() {
+    $options = get_option('sales_funnel_woocommerce_options');
+    $add_cart_to_checkout_page = isset($options['add_cart_to_checkout_page']) && $options['add_cart_to_checkout_page'] === 'on';
+
+    // Check if we are on the checkout page and the option is enabled
+    if (is_checkout() && $add_cart_to_checkout_page) {
+        // Display cart contents
+        echo '<div class="woocommerce-cart">';
+        echo do_shortcode('[woocommerce_cart]');
+        echo '</div>';
+    }
+
+    // Display the checkout form
+    echo '<div class="woocommerce-checkout">';
+    echo do_shortcode('[woocommerce_checkout]');
+    echo '</div>';
+}
+
+add_action('woocommerce_before_checkout_form', 'sales_funnel_woocommerce_add_cart_to_checkout_page', 5);
