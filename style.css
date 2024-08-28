@@ -337,7 +337,7 @@ footer a {
 }
 
 .nav-tabs .nav-link.active {
-    color: #fff;
+    color: #000;
     background-color: #e74c3c;
     border-color: #e74c3c;
 }
@@ -378,8 +378,6 @@ footer a {
     .PR-table thead {
         display: none;
     }
-
-	
 	
 	.PR-table th {display: block;width: 100%!important;}
 	
@@ -445,22 +443,22 @@ footer a {
 
 .mt-auto {text-align: center!important;}
 
-.btn-primary, .add-to-cart-button, #place_order {
+.btn-primary, .add-to-cart-button, .ajax_add_to_cart, #place_order {
     background-color: #e74c3c!important;
-    color: #fff!important;
+    color: #000!important;
 }
 
 .btn-primary:hover {
     background-color: #c0392b;
 }
 
-.woocommerce-product-add-to-cart .button, .add-to-cart-button {
+.woocommerce-product-add-to-cart .button, .add-to-cart-button, .ajax_add_to_cart, {
     display: inline-block;
     padding: 12px 20px;
     font-size: 1rem;
     font-weight: bold;
     text-transform: uppercase;
-    color: #fff;
+    color: #000;
     background-color: #e74c3c; 
     border: none;
     border-radius: 8px;
@@ -485,4 +483,3 @@ footer a {
     pointer-events: none;
     transform: none; 
 }
-
