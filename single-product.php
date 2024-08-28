@@ -28,11 +28,11 @@ $attributes = $product->get_attributes();
                 ?>
                     <!-- Main Product Image with Modal -->
                     <div class="main-product-image">
-                        <img id="main-product-image" src="<?php echo esc_url($main_image_url); ?>" itemprop="image" alt="<?php echo esc_attr($main_image_alt); ?>" class="img-fluid mb-3" data-bs-toggle="modal" data-bs-target="#image-modal">
+                        <img width="470" height="470" id="main-product-image" src="<?php echo esc_url($main_image_url); ?>" itemprop="image" alt="<?php echo esc_attr($main_image_alt); ?>" class="img-fluid mb-3" data-bs-toggle="modal" data-bs-target="#image-modal" role="img" aria-label="<?php esc_attr_e('Main product image', 'woocommerce'); ?>">
                     </div>
 
                     <!-- Carousel with thumbnails -->
-                    <div id="product-thumbnails-carousel" class="carousel slide" data-bs-ride="carousel" aria-label="Product Image Gallery">
+                    <div id="product-thumbnails-carousel" class="carousel slide" data-bs-ride="carousel" aria-label="Product Image Gallery" role="region" aria-roledescription="carousel">
                         <div class="carousel-inner">
                             <?php
                             $chunks = array_chunk($attachment_ids, 4); // Divide images into chunks of 4
@@ -45,7 +45,7 @@ $attributes = $product->get_attributes();
                                             $thumbnail_alt = get_post_meta($attachment_id, '_wp_attachment_image_alt', true);
                                         ?>
                                             <div class="col-3">
-                                                <img src="<?php echo esc_url($thumbnail_url); ?>" data-full="<?php echo esc_url($full_image_url); ?>" alt="<?php echo esc_attr($thumbnail_alt); ?>" class="img-thumbnail cursor-pointer">
+                                                <img width="100" height="100" src="<?php echo esc_url($thumbnail_url); ?>" data-full="<?php echo esc_url($full_image_url); ?>" alt="<?php echo esc_attr($thumbnail_alt); ?>" class="img-thumbnail cursor-pointer" role="img" aria-label="<?php echo esc_attr($thumbnail_alt); ?>">
                                             </div>
                                         <?php endforeach; ?>
                                     </div>
@@ -54,18 +54,16 @@ $attributes = $product->get_attributes();
                         </div>
 
                         <!-- Carousel controls -->
-                        <a class="carousel-control-prev" href="#product-thumbnails-carousel" role="button" data-bs-slide="prev" aria-label="Previous">
+                        <a class="carousel-control-prev" href="#product-thumbnails-carousel" role="button" data-bs-slide="prev" aria-label="<?php esc_attr_e('Previous slide', 'woocommerce'); ?>">
                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                             <span class="visually-hidden"><?php esc_html_e('Previous', 'woocommerce'); ?></span>
                         </a>
-                        <a class="carousel-control-next" href="#product-thumbnails-carousel" role="button" data-bs-slide="next" aria-label="Next">
+                        <a class="carousel-control-next" href="#product-thumbnails-carousel" role="button" data-bs-slide="next" aria-label="<?php esc_attr_e('Next slide', 'woocommerce'); ?>">
                             <span class="carousel-control-next-icon" aria-hidden="true"></span>
                             <span class="visually-hidden"><?php esc_html_e('Next', 'woocommerce'); ?></span>
                         </a>
                     </div>
-                <?php
-                endif;
-                ?>
+                <?php endif; ?>
             </div>
 
             <!-- Product Summary -->
@@ -153,55 +151,59 @@ $attributes = $product->get_attributes();
                 
                 <div class="tab-pane fade" id="additional-details" role="tabpanel" aria-labelledby="additional-details-tab">
                     <table class="PR-table mt-3">
-                        <tr>
-                            <th><?php esc_html_e('Price:', 'woocommerce'); ?></th>
-                            <td><?php echo wp_kses_post($product->get_price_html()); ?></td>
-                        </tr>
-                        <tr>
-                            <th><?php esc_html_e('Sale Price:', 'woocommerce'); ?></th>
-                            <td><?php echo $product->is_on_sale() ? wp_kses_post($product->get_sale_price()) : '&mdash;'; ?></td>
-                        </tr>
-                        <tr>
-                            <th><?php esc_html_e('Weight:', 'woocommerce'); ?></th>
-                            <td><?php echo $product->get_weight() ? esc_html($product->get_weight()) . ' ' . get_option('woocommerce_weight_unit') : '&mdash;'; ?></td>
-                        </tr>
-                        <tr>
-                            <th><?php esc_html_e('SKU:', 'woocommerce'); ?></th>
-                            <td><?php echo esc_html($product->get_sku()); ?></td>
-                        </tr>
-                        <tr>
-                            <th><?php esc_html_e('Dimensions:', 'woocommerce'); ?></th>
-                            <td><?php 
-                                $dimensions = $product->get_dimensions(false);
-                                echo $dimensions ? esc_html($dimensions) : '&mdash;';
-                            ?></td>
-                        </tr>
+                        <thead>
+                            <tr>
+                                <th scope="col"><?php esc_html_e('Attribute', 'woocommerce'); ?></th>
+                                <th scope="col"><?php esc_html_e('Value', 'woocommerce'); ?></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row"><?php esc_html_e('Price:', 'woocommerce'); ?></th>
+                                <td><?php echo wp_kses_post($product->get_price_html()); ?></td>
+                            </tr>
+                            <tr>
+                                <th scope="row"><?php esc_html_e('Sale Price:', 'woocommerce'); ?></th>
+                                <td><?php echo $product->is_on_sale() ? wp_kses_post($product->get_sale_price()) : '&mdash;'; ?></td>
+                            </tr>
+                            <tr>
+                                <th scope="row"><?php esc_html_e('Weight:', 'woocommerce'); ?></th>
+                                <td><?php echo $product->get_weight() ? esc_html($product->get_weight()) . ' ' . get_option('woocommerce_weight_unit') : '&mdash;'; ?></td>
+                            </tr>
+                            <tr>
+                                <th scope="row"><?php esc_html_e('SKU:', 'woocommerce'); ?></th>
+                                <td><?php echo esc_html($product->get_sku()); ?></td>
+                            </tr>
+                            <tr>
+                                <th scope="row"><?php esc_html_e('Dimensions:', 'woocommerce'); ?></th>
+                                <td><?php echo $product->get_dimensions() ? esc_html($product->get_dimensions()) : '&mdash;'; ?></td>
+                            </tr>
+                        </tbody>
                     </table>
                 </div>
-
+                
                 <div class="tab-pane fade" id="attributes" role="tabpanel" aria-labelledby="attributes-tab">
-                    <?php if ($attributes) : ?>
-                        <table class="PR-table mt-3">
-                            <?php foreach ($attributes as $attribute) : ?>
-                                <?php
-                                // Skip variation attributes
+                    <table class="PR-table mt-3">
+                        <thead>
+                            <tr>
+                                <th scope="col"><?php esc_html_e('Attribute', 'woocommerce'); ?></th>
+                                <th scope="col"><?php esc_html_e('Value', 'woocommerce'); ?></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($attributes as $attribute) :
                                 if ($attribute->get_variation()) continue;
-                                // Get attribute name and value
                                 $attribute_name = wc_attribute_label($attribute->get_name());
                                 $attribute_value = $product->get_attribute($attribute->get_name());
-
-                                // Ensure attribute value is valid
                                 $attribute_value = is_string($attribute_value) ? wp_kses_post($attribute_value) : '&mdash;';
-                                ?>
+                            ?>
                                 <tr>
-                                    <th><?php echo esc_html($attribute_name); ?></th>
+                                    <th scope="row"><?php echo esc_html($attribute_name); ?></th>
                                     <td><?php echo $attribute_value; ?></td>
                                 </tr>
                             <?php endforeach; ?>
-                        </table>
-                    <?php else : ?>
-                        <p><?php esc_html_e('No attributes available.', 'woocommerce'); ?></p>
-                    <?php endif; ?>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
@@ -240,7 +242,7 @@ $attributes = $product->get_attributes();
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?php esc_attr_e('Close', 'woocommerce'); ?>"></button>
             </div>
             <div class="modal-body">
-                <img src="<?php echo esc_url($main_image_url); ?>" class="img-fluid" alt="<?php echo esc_attr($main_image_alt); ?>" id="modal-image">
+                <img src="<?php echo esc_url($main_image_url); ?>" class="img-fluid" alt="<?php echo esc_attr($main_image_alt); ?>" id="modal-image" aria-describedby="image-modal-label">
             </div>
         </div>
     </div>
