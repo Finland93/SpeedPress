@@ -150,7 +150,7 @@ $attributes = $product->get_attributes();
                 </div>
                 
                 <div class="tab-pane fade" id="additional-details" role="tabpanel" aria-labelledby="additional-details-tab">
-                    <table class="PR-table table-striped mt-3">
+                    <table class="PR-table mt-3">
                         <tr>
                             <th><?php esc_html_e('Price:', 'woocommerce'); ?></th>
                             <td><?php echo wp_kses_post($product->get_price_html()); ?></td>
@@ -179,7 +179,7 @@ $attributes = $product->get_attributes();
 
                 <div class="tab-pane fade" id="attributes" role="tabpanel" aria-labelledby="attributes-tab">
                     <?php if ($attributes) : ?>
-                        <table class="PR-table table-striped mt-3">
+                        <table class="PR-table mt-3">
                             <?php foreach ($attributes as $attribute) : ?>
                                 <?php
                                 // Skip variation attributes
