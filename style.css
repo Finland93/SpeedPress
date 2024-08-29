@@ -509,3 +509,5 @@ footer a {
 li::marker {
     content: none;
 }
+
+.entry-meta{display:none;}
