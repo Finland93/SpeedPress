@@ -11,15 +11,19 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 /* Typography */
 a, button {
     font-family: 'Roboto Condensed', sans-serif;
+    font-size:18px;
 }
 
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Montserrat', sans-serif;
+    font-size:26px;
 }
 
-p, ul, ol, main {
+p, ul, ol, main, li, span {
     font-family: 'Lato', sans-serif;
+    font-size:18px;
 }
+
 
 /* Footer */
 footer a {
