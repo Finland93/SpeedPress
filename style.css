@@ -506,4 +506,6 @@ footer a {
     transform: none; 
 }
 
-
+li::marker {
+    content: none;
+}
