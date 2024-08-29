@@ -87,6 +87,8 @@ footer a {
     box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
 }
 
+.sidebar {margin-bottom: 20px;}
+
 /* Navbar */
 .navbar {
     background-color: #343a40; /* Dark background */
@@ -380,6 +382,17 @@ footer a {
     }
 	
 	.PR-table th {display: block;width: 100%!important;}
+	.woocommerce-cart-form {
+		overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+	}
+	
+	.table {
+		border-collapse: collapse;
+		width: 100%;
+	  }
+	
+	#payment, .shop_table {width: 100%!important; margin-bottom: 20px!important;  }
 	
     .PR-table, .PR-table tbody, .PR-table tr, .PR-table td {
         display: block;
@@ -441,36 +454,45 @@ footer a {
     text-transform: uppercase;
 }
 
-.mt-auto {text-align: center!important;}
+.mt-auto {
+    text-align: center !important;
+}
 
-.btn-primary, .add-to-cart-button, .ajax_add_to_cart, #place_order {
-    background-color: #e74c3c!important;
-    color: #000!important;
+.btn-primary, 
+.add-to-cart-button, 
+.ajax_add_to_cart, 
+#place_order {
+    background-color: #e74c3c !important;
+    color: #000 !important;
 }
 
 .btn-primary:hover {
     background-color: #c0392b;
 }
 
-.woocommerce-product-add-to-cart .button, .add-to-cart-button, .ajax_add_to_cart, {
-    display: inline-block;
-    padding: 12px 20px;
-    font-size: 1rem;
-    font-weight: bold;
+.woocommerce-product-add-to-cart .button, 
+.add-to-cart-button, 
+.ajax_add_to_cart {
+    display: inline-block !important;
+    padding: 12px 20px !important;
+    font-size: 1rem !important;
+    font-weight: bold !important;
     text-transform: uppercase;
-    color: #000;
-    background-color: #e74c3c; 
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    text-align: center;
-    text-decoration: none;
-	  margin-top: 10px;
+    color: #000 !important;
+    background-color: #e74c3c !important; 
+    border: none !important;
+    border-radius: 8px !important;
+    cursor: pointer !important;
+    transition: background-color 0.3s ease, transform 0.2s ease !important;
+    text-align: center !important;
+    text-decoration: none !important;
+    margin-top: 10px !important;
 }
 
 .woocommerce-product-add-to-cart .button:hover, 
-.woocommerce-product-add-to-cart .button:focus {
+.woocommerce-product-add-to-cart .button:focus, 
+.add-to-cart-button:hover, 
+.ajax_add_to_cart:hover {
     background-color: #c0392b; 
     transform: translateY(-2px);
 }
@@ -483,3 +505,5 @@ footer a {
     pointer-events: none;
     transform: none; 
 }
+
+
