@@ -13,65 +13,37 @@
                     endif;
                     ?>
                 </h1>
-                <?php if (have_posts()) : ?>
-                    <div class="archive-description">
-                        <?php // Optionally add a description or message here ?>
-                    </div>
-                <?php endif; ?>
             </header>
             
             <?php
             // Start the loop for search results
             if (have_posts()) :
-                $post_types = array('post', 'page', 'product'); // Define your post types here
-
-                // Separate loops for different post types
-                foreach ($post_types as $post_type) :
-                    // Query arguments
-                    $args = array(
-                        'post_type'      => $post_type,
-                        's'              => get_search_query(), // The search query
-                        'posts_per_page' => -1, // Or set a number
-                    );
-                    
-                    $query = new WP_Query($args);
-                    
-                    if ($query->have_posts()) :
-                        ?>
-                        <h2><?php echo ucfirst($post_type); ?>s</h2> <!-- Title for post type -->
-                        <div class="row">
-                            <?php while ($query->have_posts()) : $query->the_post(); ?>
-                                <div class="col-md-6 mb-4">
-                                    <div class="card">
-                                        <?php if (has_post_thumbnail()) : ?>
-                                            <div class="position-relative">
-                                                <a href="<?php the_permalink(); ?>">
-                                                    <img width="388" height="221" src="<?php the_post_thumbnail_url('archive-banner'); ?>" class="card-img-top" alt="<?php the_title_attribute(); ?>">
-                                                </a>
-                                                <?php
-                                                $categories = get_the_category();
-                                                if (!empty($categories)) {
-                                                    echo '<span class="badge bg-primary position-absolute top-0 start-0 m-2">' . esc_html($categories[0]->name) . '</span>';
-                                                }
-                                                ?>
-                                            </div>
-                                        <?php endif; ?>
-                                        <div class="bg-dark text-white p-2">
-                                            <?php echo get_the_date(); ?>
-                                        </div>
-                                        <div class="card-body">
-                                            <h2 class="card-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
-                                            <p class="card-text"><?php echo wp_trim_words(get_the_excerpt(), 20, '...'); ?></p>
-                                        </div>
-                                    </div>
+                while (have_posts()) : the_post(); ?>
+                    <div class="col-md-6 mb-4">
+                        <div class="card">
+                            <?php if (has_post_thumbnail()) : ?>
+                                <div class="position-relative">
+                                    <a href="<?php the_permalink(); ?>">
+                                        <img width="388" height="221" src="<?php the_post_thumbnail_url('archive-banner'); ?>" class="card-img-top" alt="<?php the_title_attribute(); ?>">
+                                    </a>
+                                    <?php
+                                    $categories = get_the_category();
+                                    if (!empty($categories)) {
+                                        echo '<span class="badge bg-primary position-absolute top-0 start-0 m-2">' . esc_html($categories[0]->name) . '</span>';
+                                    }
+                                    ?>
                                 </div>
-                            <?php endwhile; ?>
+                            <?php endif; ?>
+                            <div class="bg-dark text-white p-2">
+                                <?php echo get_the_date(); ?>
+                            </div>
+                            <div class="card-body">
+                                <h2 class="card-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
+                                <p class="card-text"><?php echo wp_trim_words(get_the_excerpt(), 20, '...'); ?></p>
+                            </div>
                         </div>
-                        <?php
-                        wp_reset_postdata(); // Reset the post data
-                    endif;
-                endforeach;
-
+                    </div>
+                <?php endwhile;
             else :
                 ?>
                 <p><?php esc_html_e('Sorry, no posts matched your criteria.', 'speedpress'); ?></p>
