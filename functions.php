@@ -258,6 +258,9 @@ add_image_size('hero-image', 1980, 367, true);
 
 // Check if WooCommerce is active
 if ( class_exists( 'WooCommerce' ) ) {
+	//Support for WooCommerce
+	add_theme_support( 'woocommerce' );
+	
     // Remove product zoom
     add_filter('woocommerce_single_product_zoom_enabled', '__return_false');
 
