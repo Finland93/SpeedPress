@@ -120,7 +120,7 @@ $attributes = $product->get_attributes();
                     <?php endif; ?>
 
                     <?php if ($categories = wc_get_product_category_list($product->get_id(), ', ', '<span>', '</span>')) : ?>
-                        <p><strong><?php esc_html_e('Categories:', 'woocommerce'); ?></strong> <?php echo $categories; ?></p>
+                        <p><strong><?php esc_html_e('Category:', 'woocommerce'); ?></strong> <?php echo $categories; ?></p>
                     <?php endif; ?>
 
                     <?php if ($brand = get_post_meta($product->get_id(), '_brand', true)) : ?>
@@ -214,7 +214,7 @@ $attributes = $product->get_attributes();
         $upsell_ids = $product->get_upsell_ids();
         if (!empty($upsell_ids)) : ?>
             <div class="mt-5">
-                <h2><?php esc_html_e('You may also like...', 'woocommerce'); ?></h2>
+                <h2><?php esc_html_e('Also Check Out These', 'woocommerce'); ?></h2>
                 <?php
                 woocommerce_upsell_display(4, 4); 
                 ?>
@@ -223,7 +223,7 @@ $attributes = $product->get_attributes();
 
         <!-- Related Products -->
         <div class="mt-5">
-            <h2><?php esc_html_e('Related products', 'woocommerce'); ?></h2>
+            <h2><?php esc_html_e('Similar Products', 'woocommerce'); ?></h2>
             <?php
             woocommerce_output_related_products(array(
                 'posts_per_page' => 4,
