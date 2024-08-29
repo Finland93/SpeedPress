@@ -510,7 +510,7 @@ footer a {
     transform: none; 
 }
 
-li::marker {
+li.product-category::marker {
     content: none;
 }
 
