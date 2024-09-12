@@ -107,10 +107,7 @@
                                                     <meta itemprop="reviewCount" content="<?php echo esc_attr($review_count); ?>">
                                                 </div>
                                             <?php endif; ?>
-
-                                            <div class="mt-3">
                                                 <?php woocommerce_template_loop_add_to_cart(); ?>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
