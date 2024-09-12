@@ -516,4 +516,4 @@ li.product-category::marker {
 
 .entry-meta{display:none;}
 
-.woocommerce-Price-amount {color: green!important; font-size: 30px!important;}
+.woocommerce-product-price .woocommerce-Price-amount, .card-text .woocommerce-Price-amount  {color: green!important; font-size: 30px!important;}
