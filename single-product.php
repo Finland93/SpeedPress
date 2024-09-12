@@ -261,7 +261,7 @@ $attributes = $product->get_attributes();
         $related_products = wc_get_related_products($product->get_id(), 4); // Get related products
         if (!empty($related_products)) : ?>
             <div class="mt-5">
-                <h2><?php esc_html_e('Releated products', 'woocommerce'); ?></h2>
+                <h3><?php esc_html_e('Releated products', 'woocommerce'); ?></h3>
                 <div class="row">
                     <?php foreach ($related_products as $related_id) :
                         $related_product = wc_get_product($related_id);
