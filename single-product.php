@@ -211,26 +211,99 @@ $attributes = $product->get_attributes();
 
         <!-- Upsell Products -->
         <?php
-        $upsell_ids = $product->get_upsell_ids();
+        $upsell_ids = $product->get_upsell_ids(); // Get upsell product IDs
         if (!empty($upsell_ids)) : ?>
             <div class="mt-5">
-                <h2><?php esc_html_e('Also Check Out These', 'woocommerce'); ?></h2>
-                <?php
-                woocommerce_upsell_display(4, 4); 
-                ?>
+                <h2><?php esc_html_e('Checkout these', 'woocommerce'); ?></h2>
+                <div class="row">
+                    <?php foreach ($upsell_ids as $upsell_id) :
+                        $upsell_product = wc_get_product($upsell_id);
+                        ?>
+                        <div class="col-md-4 mb-4" itemscope itemtype="http://schema.org/Product">
+                            <div class="card">
+                                <div class="position-relative">
+                                    <a href="<?php echo get_permalink($upsell_product->get_id()); ?>" itemprop="url">
+                                        <?php if ($upsell_product->get_image_id()) : ?>
+                                            <img src="<?php echo wp_get_attachment_url($upsell_product->get_image_id()); ?>" class="card-img-top" alt="<?php echo esc_attr($upsell_product->get_name()); ?>" itemprop="image">
+                                        <?php else : ?>
+                                            <img src="<?php echo wc_placeholder_img_src(); ?>" alt="<?php echo esc_attr($upsell_product->get_name()); ?>" class="card-img-top">
+                                        <?php endif; ?>
+                                    </a>
+                                </div>
+        
+                                <div class="card-body text-center">
+                                    <h2 class="card-title" itemprop="name">
+                                        <a href="<?php echo get_permalink($upsell_product->get_id()); ?>" class="text-dark">
+                                            <?php echo esc_html($upsell_product->get_name()); ?>
+                                        </a>
+                                    </h2>
+        
+                                    <div class="card-text" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+                                        <?php echo $upsell_product->get_price_html(); ?>
+                                        <meta itemprop="price" content="<?php echo esc_attr($upsell_product->get_price()); ?>">
+                                        <meta itemprop="priceCurrency" content="<?php echo esc_attr(get_woocommerce_currency()); ?>">
+                                        <meta itemprop="availability" content="http://schema.org/<?php echo $upsell_product->is_in_stock() ? 'InStock' : 'OutOfStock'; ?>">
+                                    </div>
+        
+                                    <div class="mt-3">
+                                        <?php woocommerce_template_loop_add_to_cart(array('product' => $upsell_product)); ?>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+        <?php endif; ?>
+        
+        <!-- Related Products -->
+        <?php
+        $related_products = wc_get_related_products($product->get_id(), 4); // Get related products
+        if (!empty($related_products)) : ?>
+            <div class="mt-5">
+                <h2><?php esc_html_e('Releated products', 'woocommerce'); ?></h2>
+                <div class="row">
+                    <?php foreach ($related_products as $related_id) :
+                        $related_product = wc_get_product($related_id);
+                        ?>
+                        <div class="col-md-4 mb-4" itemscope itemtype="http://schema.org/Product">
+                            <div class="card">
+                                <div class="position-relative">
+                                    <a href="<?php echo get_permalink($related_product->get_id()); ?>" itemprop="url">
+                                        <?php if ($related_product->get_image_id()) : ?>
+                                            <img src="<?php echo wp_get_attachment_url($related_product->get_image_id()); ?>" class="card-img-top" alt="<?php echo esc_attr($related_product->get_name()); ?>" itemprop="image">
+                                        <?php else : ?>
+                                            <img src="<?php echo wc_placeholder_img_src(); ?>" alt="<?php echo esc_attr($related_product->get_name()); ?>" class="card-img-top">
+                                        <?php endif; ?>
+                                    </a>
+                                </div>
+        
+                                <div class="card-body text-center">
+                                    <h2 class="card-title" itemprop="name">
+                                        <a href="<?php echo get_permalink($related_product->get_id()); ?>" class="text-dark">
+                                            <?php echo esc_html($related_product->get_name()); ?>
+                                        </a>
+                                    </h2>
+        
+                                    <div class="card-text" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+                                        <?php echo $related_product->get_price_html(); ?>
+                                        <meta itemprop="price" content="<?php echo esc_attr($related_product->get_price()); ?>">
+                                        <meta itemprop="priceCurrency" content="<?php echo esc_attr(get_woocommerce_currency()); ?>">
+                                        <meta itemprop="availability" content="http://schema.org/<?php echo $related_product->is_in_stock() ? 'InStock' : 'OutOfStock'; ?>">
+                                    </div>
+        
+                                    <div class="mt-3">
+                                        <?php woocommerce_template_loop_add_to_cart(array('product' => $related_product)); ?>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
             </div>
         <?php endif; ?>
 
-        <!-- Related Products -->
-        <div class="mt-5">
-            <h2><?php esc_html_e('Similar Products', 'woocommerce'); ?></h2>
-            <?php
-            woocommerce_output_related_products(array(
-                'posts_per_page' => 4,
-                'columns' => 4,       
-            ));
-            ?>
-        </div>
+
     </div>
 </main>
 
