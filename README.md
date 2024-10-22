@@ -38,7 +38,18 @@ Enhance your site's performance and user engagement with these plugins:
 - **[Reading Time WP](https://fi.wordpress.org/plugins/reading-time-wp/)**
 
 ---
-
 ### Learn more about [Bootstrap 5](https://getbootstrap.com/docs/5.2/getting-started/introduction) and start building your SEO-optimized WordPress site today with SpeedPress!
-
 ---
+### Supporters
+---
+- **[Kryptolompakko.net](https://Kryptolompakko.net)
+- **[Kryptoporssi.net](https://Kryptoporssi.net)
+- **[Kryptoverotus.net](https://Kryptoverotus.net)
+- **[Krypto-kurssit.net](https://Krypto-kurssit.net)
+- **[Paras-liittyma.fi](https://Paras-liittyma.fi)
+- **[Korkoa-korolle.fi](https://Korkoa-korolle.fi)
+- **[Lainalaskelma.fi](https://Lainalaskelma.fi)
+- **[Porssisahko-nyt.fi](https://Porssisahko-nyt.fi)
+- **[Aurinkopaneeli.com](https://Aurinkopaneeli.com)
+- **[Sahkotarjous.org](https://Sahkotarjous.org)
+- **[Affirotta.fi](https://Affirotta.fi)
