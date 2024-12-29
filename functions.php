@@ -8,6 +8,18 @@ function speedpress_enqueue_favicons() {
 }
 add_action('wp_head', 'speedpress_enqueue_favicons');
 
+// Remove jQuery if WooCommerce is not installed
+function speedpress_conditional_jquery() {
+    if (!class_exists('WooCommerce')) {
+        // If WooCommerce is not installed, deregister jQuery
+        wp_deregister_script('jquery');
+    } else {
+        // If WooCommerce is installed, ensure jQuery is enqueued
+        wp_enqueue_script('jquery');
+    }
+}
+add_action('wp_enqueue_scripts', 'speedpress_conditional_jquery', 5); // Run early to ensure jQuery is deregistered before being enqueued
+
 // Enqueue styles and scripts
 function speedpress_enqueue_styles_scripts() {
     // Styles
@@ -17,25 +29,21 @@ function speedpress_enqueue_styles_scripts() {
 
     // Scripts
     wp_enqueue_script('bootstrap-js', get_template_directory_uri() . '/js/bootstrap.bundle.min.js', array(), '5.3.0', true);
-
-    // Ensure jQuery is loaded only if WooCommerce is active
-    if ( class_exists( 'WooCommerce' ) ) {
-        wp_enqueue_script('jquery');
-    }
 }
 add_action('wp_enqueue_scripts', 'speedpress_enqueue_styles_scripts');
 
-
-// Remove jQuery Migrate
+// Remove jQuery Migrate if jQuery is loaded
 function speedpress_remove_jquery_migrate($scripts) {
     if (isset($scripts->registered['jquery'])) {
         $script = $scripts->registered['jquery'];
         if ($script->deps) {
+            // Remove jQuery Migrate if jQuery is being loaded
             $script->deps = array_diff($script->deps, array('jquery-migrate'));
         }
     }
 }
 add_action('wp_default_scripts', 'speedpress_remove_jquery_migrate');
+
 
 // Setup theme features
 function speedpress_setup_theme() {
