@@ -18,10 +18,13 @@ function speedpress_enqueue_styles_scripts() {
     // Scripts
     wp_enqueue_script('bootstrap-js', get_template_directory_uri() . '/js/bootstrap.bundle.min.js', array(), '5.3.0', true);
 
-    // Ensure jQuery is loaded on all pages
-    wp_enqueue_script('jquery');
+    // Ensure jQuery is loaded only if WooCommerce is active
+    if ( class_exists( 'WooCommerce' ) ) {
+        wp_enqueue_script('jquery');
+    }
 }
 add_action('wp_enqueue_scripts', 'speedpress_enqueue_styles_scripts');
+
 
 // Remove jQuery Migrate
 function speedpress_remove_jquery_migrate($scripts) {
