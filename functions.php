@@ -318,3 +318,7 @@ if ( class_exists( 'WooCommerce' ) ) {
     add_filter('template_include', 'speedpress_checkout_template');
 	
 }
+
+//Remove auto-formatting
+remove_filter('the_content', 'wpautop');
+remove_filter('the_excerpt', 'wpautop');
