@@ -2,7 +2,7 @@
 
 Welcome to SpeedPress, the ultimate WordPress theme for blazing-fast, SEO-optimized websites without the bloat. Designed for developers who prefer building with pure HTML, CSS and JS, SpeedPress integrates the power of Bootstrap 5 seamlessly into WordPress.
 
-Explore our templates and get started for free on our discussion.
+Explore our templates and get started for free on our discussion, or download latest release [here](https://github.com/Finland93/SpeedPress/releases/).
 
 ## Why Choose SpeedPress?
 
