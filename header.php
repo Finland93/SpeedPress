@@ -7,6 +7,10 @@
     <?php wp_head(); ?>
 	<meta name="msapplication-TileColor" content="#000">
 	<meta name="theme-color" content="#000">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="default">
+	<meta name="apple-mobile-web-app-title" content="SPEEDPRESS">
+	<link rel="apple-touch-icon" href="/icon-192.png">
 	<link rel="preload" href="<?php echo get_template_directory_uri(); ?>/fonts/Lato-Regular.woff2" as="font" type="font/woff2" crossorigin>
     	<link rel="preload" href="<?php echo get_template_directory_uri(); ?>/fonts/Montserrat-Regular.woff2" as="font" type="font/woff2" crossorigin>
     	<link rel="preload" href="<?php echo get_template_directory_uri(); ?>/fonts/RobotoCondensed-Regular.woff2" as="font" type="font/woff2" crossorigin>
