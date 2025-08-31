@@ -3,7 +3,7 @@
 <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
     <?php if (has_post_thumbnail()) : ?>
         <div class="hero-section mb-5" itemscope itemtype="http://schema.org/ImageObject">
-            <img src="<?php the_post_thumbnail_url('hero-image'); ?>" class="img-fluid w-100" alt="<?php the_title_attribute(); ?>" itemprop="url">
+            <img src="<?php the_post_thumbnail_url('hero-image'); ?>" class="img-fluid w-100" alt="<?php the_title_attribute(); ?>" itemprop="url" fetchpriority=high>
             <meta itemprop="width" content="1200"> <!-- Add the correct width of your image -->
             <meta itemprop="height" content="675"> <!-- Add the correct height of your image -->
         </div>
@@ -51,3 +51,4 @@
 </main>
 
 <?php get_footer(); ?>
+
