@@ -28,7 +28,7 @@ $attributes = $product->get_attributes();
                 ?>
                     <!-- Main Product Image with Modal -->
                     <div class="main-product-image">
-                        <img width="470" height="470" id="main-product-image" src="<?php echo esc_url($main_image_url); ?>" itemprop="image" alt="<?php echo esc_attr($main_image_alt); ?>" class="img-fluid mb-3" data-bs-toggle="modal" data-bs-target="#image-modal" role="img" aria-label="<?php esc_attr_e('Main product image', 'woocommerce'); ?>">
+                        <img width="470" height="470" id="main-product-image" src="<?php echo esc_url($main_image_url); ?>" itemprop="image" alt="<?php echo esc_attr($main_image_alt); ?>" class="img-fluid mb-3" data-bs-toggle="modal" data-bs-target="#image-modal" role="img" aria-label="<?php esc_attr_e('Main product image', 'woocommerce'); ?>" fetchpriority=high>
                     </div>
 
                     <!-- Carousel with thumbnails -->
@@ -340,3 +340,4 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 </script>
+
