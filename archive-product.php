@@ -124,6 +124,7 @@
                 <?php else : ?>
                     <p><?php esc_html_e('No products found in this category.', 'speedpress'); ?></p>
                 <?php endif; ?>
+            <?php endif; ?>
             </div>
         </div>
 

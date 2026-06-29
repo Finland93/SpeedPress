@@ -1,4 +1,15 @@
 <?php
+// Theme version (used to cache-bust enqueued assets).
+if ( ! defined( 'SPEEDPRESS_VERSION' ) ) {
+    $speedpress_theme = wp_get_theme();
+    define( 'SPEEDPRESS_VERSION', $speedpress_theme->get( 'Version' ) ? $speedpress_theme->get( 'Version' ) : '1.1' );
+}
+
+// Content width (used by WordPress to constrain embeds/media).
+if ( ! isset( $content_width ) ) {
+    $content_width = 1140;
+}
+
 // Enqueue favicons and app icons
 function speedpress_enqueue_favicons() {
     echo '<link rel="apple-touch-icon" sizes="180x180" href="' . esc_url(get_template_directory_uri() . '/apple-touch-icon.png') . '">' . "\n";
@@ -24,7 +35,7 @@ add_action('wp_enqueue_scripts', 'speedpress_conditional_jquery', 5); // Run ear
 function speedpress_enqueue_styles_scripts() {
     // Styles
     wp_enqueue_style('bootstrap-css', get_template_directory_uri() . '/css/bootstrap.min.css', array(), '5.3.0');
-    wp_enqueue_style('main-style', get_stylesheet_uri());
+    wp_enqueue_style('main-style', get_stylesheet_uri(), array(), SPEEDPRESS_VERSION);
     wp_enqueue_style('custom-fonts', get_template_directory_uri() . '/fonts.css', array(), '1.0.0');
 
     // Scripts
@@ -47,10 +58,42 @@ add_action('wp_default_scripts', 'speedpress_remove_jquery_migrate');
 
 // Setup theme features
 function speedpress_setup_theme() {
-    register_nav_menus(array(
-        'primary' => __('Primary Menu', 'speedpress'),
-    ));
-    add_theme_support('widgets', 'speedpress');
+    // Make the theme translatable.
+    load_theme_textdomain( 'speedpress', get_template_directory() . '/languages' );
+
+    // Let WordPress manage the document <title>.
+    add_theme_support( 'title-tag' );
+
+    // Output valid HTML5 markup for core features.
+    add_theme_support( 'html5', array(
+        'search-form',
+        'gallery',
+        'caption',
+        'style',
+        'script',
+        'navigation-widgets',
+    ) );
+
+    // Feed links and featured images.
+    add_theme_support( 'automatic-feed-links' );
+    add_theme_support( 'post-thumbnails' );
+
+    // Custom logo (shown in the navbar when set).
+    add_theme_support( 'custom-logo', array(
+        'height'      => 40,
+        'width'       => 200,
+        'flex-height' => true,
+        'flex-width'  => true,
+    ) );
+
+    // Optimised image sizes used by the templates.
+    add_image_size( 'archive-banner', 582, 332, true );
+    add_image_size( 'hero-image', 1980, 367, true );
+
+    // Navigation menus.
+    register_nav_menus( array(
+        'primary' => __( 'Primary Menu', 'speedpress' ),
+    ) );
 }
 add_action('after_setup_theme', 'speedpress_setup_theme');
 
@@ -256,14 +299,7 @@ function speedpress_disable_comments_admin_bar_icon() {
 }
 add_action('wp_before_admin_bar_render', 'speedpress_disable_comments_admin_bar_icon');
 
-// Add theme support for Featured Images
-add_theme_support('post-thumbnails');
-
-// Change archive image size for optimization
-add_image_size('archive-banner', 582, 332, true);
-
-// Change hero image size for optimization
-add_image_size('hero-image', 1980, 367, true);
+// (Featured-image support and custom image sizes are registered in speedpress_setup_theme().)
 
 
 

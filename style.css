@@ -3,9 +3,15 @@ Theme Name: SpeedPress
 Theme URI: https://github.com/Finland93/SpeedPress
 Author: Finland93
 Author URI: https://github.com/Finland93/
-Description: Lightweight WordPress theme without block editors and using only Bootstrap 5, this theme is for persons who likes to build HTML websites, checkout our free templates from our home page.
+Description: Lightweight WordPress theme without the block editor, built on Bootstrap 5 - for people who like to build HTML-based websites. Check our free templates on the home page.
+Version: 1.2
+Requires at least: 5.2
+Tested up to: 7.0
+Requires PHP: 7.4
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: speedpress
+Tags: custom-logo, custom-menu, featured-images, footer-widgets, translation-ready, right-sidebar, two-columns
 */
 
 /* Typography */

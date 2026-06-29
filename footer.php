@@ -30,7 +30,7 @@
 
         <div class="row mt-4">
             <div class="col-md-12 text-white text-center">
-                <p>&copy; <?php echo date('Y'); ?> <?php bloginfo('name'); ?>. All rights reserved. Powered by: <a href="https://github.com/Finland93/SpeedPress" title="Bootstrap 5 wordpress theme">SpeedPress</a></p>
+                <p>&copy; <?php echo esc_html( wp_date('Y') ); ?> <?php bloginfo('name'); ?>. <?php esc_html_e( 'All rights reserved.', 'speedpress' ); ?> <?php esc_html_e( 'Powered by:', 'speedpress' ); ?> <a href="https://github.com/Finland93/SpeedPress" title="Bootstrap 5 wordpress theme">SpeedPress</a></p>
             </div>
         </div>
     </div>
